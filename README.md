@@ -1,39 +1,148 @@
-# Sin Remedio Analysis Toolkit
+# Geoaffect Toolkit · Cartografía geocrítica asistida
 
-[Español abajo]
+Herramientas reproducibles para el análisis espacial y afectivo de corpus literarios,
+con visualizaciones interactivas y reportes en Excel y mapas.
 
-This repository contains the methodology and tools developed for the computational analysis of the novel *Sin Remedio* (Antonio Caballero). The project automates the extraction of spatial-affective relationships using natural language processing (NLP) and data visualization, following a critical approach to Digital Humanities.
-
-## Methodological Transparency & AI Integration
-This project was developed through a *human-in-the-loop* workflow using Claude (Anthropic) as an AI-assisted research collaborator. 
-- **AI Role**: Code generation, pattern extraction, and statistical analysis.
-- **Human Role**: Corpus preparation, prompt engineering, validation of all algorithmic decisions, and interpretative analysis.
-- **Commitment**: The methodology prioritizes transparency, documenting all AI-assisted steps to ensure replicability and auditability.
-
-## Project Structure
-- `/src`: Python modules for character extraction, place identification, and affective polarity analysis.
-- `/notebooks`: Jupyter notebooks designed for Google Colab, ensuring full replicability.
-- `/configs`: YAML configuration files.
+Diseñado originalmente para *Sin remedio* de Antonio Caballero (Bogotá, 1972), pero
+configurable para cualquier corpus narrativo con marcas de párrafo o capítulo.
 
 ---
 
-# Toolkit para Análisis Literario: Sin Remedio
+## Estructura
 
-Este repositorio contiene la metodología y las herramientas desarrolladas para el análisis computacional de la novela *Sin Remedio*. El proyecto busca automatizar la extracción de relaciones espacio-afectivas mediante técnicas de procesamiento de lenguaje natural (PLN) y visualización de datos.
-
-## Transparencia Metodológica e Integración de IA
-Este proyecto se desarrolló mediante un flujo de trabajo *human-in-the-loop*, utilizando a Claude (Anthropic) como colaborador de investigación asistido por IA.
-- **Rol de la IA**: Generación de código Python, extracción de patrones y análisis estadístico.
-- **Rol de la investigadora**: Preparación del corpus, ingeniería de prompts, validación crítica de los resultados y análisis interpretativo.
-- **Compromiso**: La metodología prioriza la transparencia ("abrir la caja negra"), documentando cada decisión para garantizar la replicabilidad.
-
-## Estructura del proyecto
-- `/src`: Módulos de código para la extracción de personajes, lugares y análisis de polaridad afectiva.
-- `/notebooks`: Cuadernos de Jupyter diseñados para ser ejecutados en Google Colab.
-- `/configs`: Archivos de configuración (.yaml).
-
-## Nota de uso
-Debido a derechos de autor, el corpus completo no se incluye en el repositorio. Coloque el corpus en la carpeta `/data` para ejecutar el análisis.
+```
+sin_remedio_toolkit/
+├── src/                          Módulos reusables
+│   ├── corpus.py                 Carga y parseo de corpus
+│   ├── spatial_extraction.py     Extracción de referencias espaciales (regex + catálogo)
+│   ├── affect_loader.py          Carga de la extracción afectiva (Excel)
+│   ├── character_extraction.py   Detección de personajes en párrafos
+│   ├── cross_analysis.py         Cruces emocional × espacial y triple cruce
+│   ├── viz_maps.py               Mapas estilizados con base de Bogotá
+│   ├── viz_network.py            Grafos bipartitos personaje × lugar
+│   ├── viz_heatmap.py            Heatmap personaje × categoría espacial
+│   ├── exporters.py              Exportadores a Excel, CSV, JSON, GeoJSON
+│   └── interactive.py            Generación de HTML interactivos (Leaflet)
+│
+├── configs/                      Configuración por proyecto (YAML)
+│   ├── sin_remedio.yaml          Catálogos de lugares, personajes, polaridad, geometría
+│   └── plantilla_proyecto.yaml   Plantilla en blanco para nuevos proyectos
+│
+├── notebooks/                    Notebooks de ejecución (uno por análisis)
+│   ├── 01_extraccion_espacial.ipynb
+│   ├── 02_cruce_emocional.ipynb
+│   ├── 03_red_personajes.ipynb
+│   ├── 04_triple_cruce.ipynb
+│   ├── 05_recorridos_y_mapas.ipynb
+│   └── 06_dashboards_interactivos.ipynb
+│
+├── data/                         Inputs del usuario
+│   ├── corpus.txt                Texto del corpus (formato esperado en docs/)
+│   └── extraccion_emocional.xlsx Clasificación afectiva externa (opcional)
+│
+├── outputs/                      Archivos generados
+│
+├── docs/
+│   └── formato_corpus.md         Especificación del formato de corpus
+│
+└── requirements.txt              Dependencias mínimas
+```
 
 ---
-*Proyecto desarrollado en el marco de investigación académica (Maestría en Humanidades Digitales, Universidad de los Andes).*
+
+## Instalación rápida
+
+```bash
+git clone <repo-url> geoaffect-toolkit
+cd geoaffect-toolkit
+pip install -r requirements.txt
+```
+
+En Colab:
+
+```python
+!pip install -q -r requirements.txt
+```
+
+---
+
+## Uso mínimo (Sin remedio)
+
+```python
+from src import corpus, spatial_extraction, affect_loader, cross_analysis
+from src import exporters, viz_maps
+
+# 1. Cargar el corpus
+texto = corpus.load('data/corpus.txt')
+parrafos = corpus.parse_paragraphs(texto)
+
+# 2. Extraer referencias espaciales con el catálogo
+config = corpus.load_config('configs/sin_remedio.yaml')
+df_esp = spatial_extraction.extract(parrafos, config['lugares'])
+
+# 3. Cargar la extracción emocional externa
+df_emo = affect_loader.load('data/extraccion_emocional.xlsx')
+
+# 4. Cruzar
+cruce = cross_analysis.cross(df_esp, df_emo)
+piv = cross_analysis.pivot_lugar_categoria(cruce, config['polaridad'])
+
+# 5. Exportar
+exporters.to_excel(piv, 'outputs/cruce_espacial_emocional.xlsx')
+viz_maps.heat_map(piv, 'outputs/mapa_calor.png', geom=config['geometria_base'])
+```
+
+---
+
+## Reutilizar con otro corpus
+
+Para analizar otra novela urbana, basta con:
+
+1. Colocar el texto en `data/corpus.txt` (ver `docs/formato_corpus.md`).
+2. Copiar `configs/plantilla_proyecto.yaml`, renombrarlo y llenar con los lugares,
+   personajes y polaridades de la nueva obra.
+3. Ejecutar los notebooks `01_…` a `06_…` apuntando al nuevo YAML.
+
+No hace falta tocar el código de `src/`.
+
+---
+
+## Notebooks
+
+Cada notebook es autocontenido: importa los módulos, carga la configuración y
+produce los outputs correspondientes. Pueden correrse en orden o por separado.
+
+| Notebook | Produce |
+|----------|---------|
+| `01_extraccion_espacial` | `extraccion_espacial.xlsx` |
+| `02_cruce_emocional` | `cruce_espacial_emocional.xlsx`, `mapa_calor_afectivo.png`, GeoJSON |
+| `03_red_personajes` | `red_personajes_lugares.xlsx`, `red_bipartita.png` |
+| `04_triple_cruce` | `triple_cruce.xlsx`, `heatmap_personaje_cat_espacial.png` |
+| `05_recorridos_y_mapas` | Mapas individuales de cada recorrido + mapa maestro |
+| `06_dashboards_interactivos` | HTMLs con Leaflet (mapa afectivo, red, dashboard triple) |
+
+---
+
+## Notas metodológicas
+
+- Las **extracciones espaciales** se basan en regex y catálogo manual de lugares.
+  Privilegian precisión sobre exhaustividad. Revisión humana recomendada antes
+  de publicar resultados.
+- La **extracción afectiva** se asume producida externamente (por ejemplo, con
+  un LLM con esquema *human-in-the-loop*). El toolkit recibe el resultado y lo
+  cruza con la geografía.
+- La **detección de personajes** usa el catálogo del YAML. Para nombres muy
+  comunes (María, Juan), revisar muestras de coocurrencias para descartar
+  homonimias.
+
+---
+
+## Licencia y citación
+
+Código bajo licencia MIT. Si usas el toolkit para tu investigación, cita el
+trabajo original sobre el que se desarrolló:
+
+> Muñoz, I. (2026). *Bogotá, ciudad del Sin remedio: cartografía geocrítica y
+> oráculo espacial de la narrativa de Antonio Caballero asistido por
+> inteligencia artificial.* Maestría en Humanidades Digitales, Universidad de
+> los Andes.

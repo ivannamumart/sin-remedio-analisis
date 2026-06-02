@@ -1,0 +1,47 @@
+# Plantilla de configuración para un nuevo proyecto.
+# Copia este archivo, renómbralo y ajusta los valores.
+
+proyecto:
+  nombre: "Nombre de tu obra"
+  ambientacion: "Ciudad, año"
+  autor: "Autor/a"
+  año_publicacion: 0000
+
+corpus:
+  ruta_default: "data/corpus.txt"
+  # Patrón regex con un grupo capturador para el nombre/número del capítulo
+  chapter_regex: '={20,}\s*\n(CAPÍTULO\s+[IVXLC]+)\s*\n={20,}'
+  # Patrón regex con un grupo capturador para el ID del párrafo. Pasar null para auto.
+  paragraph_marker: '\[P-(\d+)\]'
+  auto_split_paragraphs: false
+
+# Polaridad: agrupa cada categoría afectiva en uno de los cuatro polos
+polaridad:
+  Negativa: []     # ej: [Tristeza, Miedo]
+  Positiva: []     # ej: [Alegría]
+  Tensión social: []
+  Neutra: []
+
+afectivas_dominantes: []   # categorías a considerar para "emoción dominante"
+
+emo_color: {}              # {Tristeza: "3F6CC7", …}
+
+categorias_sociales:
+  Élite: []                # lista de nombres canónicos de lugar
+  Popular: []
+  Tránsito urbano: []
+  Institucional/represivo: []
+
+geometria_base:
+  fondo: "#FBF7EE"
+  cerros: []               # polígono [lat, lon]
+  cerros_label: ""
+  sabana:
+    min_lon: 0
+    color: "#F2D88D"
+    label: ""
+  ejes: {}                 # {"Av X": {x:[...], y:[...], orient:v|h|d}}
+  barrios: []              # [{name, lat, lon}]
+
+lugares_catalogo_path: "configs/lugares.json"
+personajes_catalogo_path: "configs/personajes.json"

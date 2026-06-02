@@ -1,0 +1,167 @@
+# Configuración para el corpus de Sin remedio (Antonio Caballero, 1984)
+# Ambientación: Bogotá D.E., 1972
+#
+# Este archivo concentra todos los catálogos y parámetros del proyecto.
+# Modificándolo, el toolkit puede analizar otra obra sin tocar el código.
+
+proyecto:
+  nombre: "Sin remedio · Antonio Caballero"
+  ambientacion: "Bogotá D.E., 1972"
+  autor: "Antonio Caballero"
+  año_publicacion: 1984
+
+# -------- Corpus --------
+corpus:
+  ruta_default: "data/corpus.txt"
+  chapter_regex: '={20,}\s*\n(CAPÍTULO\s+[IVXLC]+)\s*\n={20,}'
+  paragraph_marker: '\[P-(\d+)\]'
+  auto_split_paragraphs: false
+
+# -------- Polaridad (qué categoría es qué) --------
+# El cruce afectivo se apoya en estas listas. Cambiarlas reasigna las polaridades.
+polaridad:
+  Negativa:
+    - Tristeza
+    - Ira/Enojo
+    - Miedo
+    - Angustia existencial
+    - Muerte
+    - Violencia
+  Positiva:
+    - Alegría
+    - Deseo/Erotismo
+  Tensión social:
+    - Clasismo
+    - Homofobia
+    - Machismo
+  Neutra:
+    - Paternidad/Maternidad
+    - Referencia de lugares
+    - Referencia poética/metapoética
+    - Sustancias psicoactivas
+
+# Categorías a considerar para "emoción dominante" (excluye neutras puras)
+afectivas_dominantes:
+  - Tristeza
+  - Ira/Enojo
+  - Miedo
+  - Angustia existencial
+  - Muerte
+  - Violencia
+  - Alegría
+  - Deseo/Erotismo
+  - Clasismo
+
+# Colores hex por emoción
+emo_color:
+  Tristeza: "3F6CC7"
+  "Angustia existencial": "5E4B8B"
+  Muerte: "37474F"
+  Miedo: "7B1FA2"
+  "Ira/Enojo": "D32F2F"
+  Violencia: "B71C1C"
+  Alegría: "2E9E5B"
+  "Deseo/Erotismo": "E0529C"
+  Clasismo: "8B5A2B"
+  Homofobia: "8B5A2B"
+  Machismo: "8B5A2B"
+
+# -------- Categorización socio-espacial --------
+# Agrupa los lugares en estratos para el análisis dialéctico.
+categorias_sociales:
+  Élite:
+    - Jockey Club
+    - Hotel Tequendama
+    - Edificio Avianca
+    - Banco de la Sabana
+    - Banco de la República
+    - Embajada de los Estados Unidos
+    - Embajada de Bélgica
+    - Hipódromo
+    - Club El Unicornio
+    - Iglesia de la Porciúncula
+    - Colegio San Tarsicio
+    - Plazoleta del General San Martín
+    - Teatro Colón
+    - "Museo de Arte Moderno (MAMBO)"
+  Popular:
+    - La Perseverancia
+    - Suba
+    - Barrio Kennedy
+    - Barrio El Rincón
+    - Barrios de invasión
+    - Bar El Oasis
+    - "Music Bar (Comida y Dancing)"
+    - "Sagrado Corazón (imágenes domésticas)"
+  Tránsito urbano:
+    - Carrera Séptima
+    - Carrera Trece
+    - Carrera Quinta
+    - Carrera Novena
+    - Carrera Quince
+    - Calle 100
+    - Calle 19
+    - Avenida Caracas
+  Institucional/represivo:
+    - Cantón Norte / Remonta de Usaquén
+    - Estación de policía
+    - Capitolio Nacional
+
+# -------- Geometría base de Bogotá --------
+# Define el contexto que se dibuja en los mapas estilizados.
+geometria_base:
+  fondo: "#FBF7EE"
+  cerros:  # polígono del límite occidental de los cerros (lat, lon)
+    - [4.5500, -74.0540]
+    - [4.5700, -74.0530]
+    - [4.5900, -74.0530]
+    - [4.6000, -74.0540]
+    - [4.6100, -74.0560]
+    - [4.6200, -74.0580]
+    - [4.6300, -74.0570]
+    - [4.6400, -74.0560]
+    - [4.6500, -74.0550]
+    - [4.6600, -74.0540]
+    - [4.6700, -74.0510]
+    - [4.6800, -74.0470]
+    - [4.6900, -74.0420]
+    - [4.7000, -74.0400]
+    - [4.7100, -74.0390]
+    - [4.7300, -74.0370]
+    - [4.7500, -74.0340]
+    - [4.7700, -74.0300]
+    - [4.8000, -74.0280]
+  cerros_label: "CERROS ORIENTALES"
+  sabana:
+    min_lon: -74.092
+    color: "#F2D88D"
+    label: "SABANA DE BOGOTÁ"
+  ejes:
+    "Cra 7":  {x: [-74.0727, -74.0660], y: [4.5800, 4.7800], orient: v}
+    "Cra 13": {x: [-74.0680, -74.0680], y: [4.5900, 4.7000], orient: v}
+    "Cra 30": {x: [-74.0833, -74.0840], y: [4.5800, 4.7000], orient: v}
+    "Cl 26":  {x: [-74.0950, -74.0680], y: [4.6168, 4.6175], orient: h}
+    "Cl 100": {x: [-74.0850, -74.0440], y: [4.6863, 4.6863], orient: h}
+    "Aut. Norte": {x: [-74.0480, -74.0367], y: [4.6900, 4.7700], orient: d}
+  barrios:
+    - {name: "La Candelaria", lat: 4.5970, lon: -74.0735}
+    - {name: "Centro Internacional", lat: 4.6135, lon: -74.0700}
+    - {name: "Parque Nacional", lat: 4.6189, lon: -74.0664}
+    - {name: "La Soledad", lat: 4.6300, lon: -74.0790}
+    - {name: "La Perseverancia", lat: 4.6233, lon: -74.0640}
+    - {name: "Teusaquillo", lat: 4.6275, lon: -74.0830}
+    - {name: "Chapinero", lat: 4.6516, lon: -74.0640}
+    - {name: "Quinta Camacho", lat: 4.6620, lon: -74.0590}
+    - {name: "Chicó", lat: 4.6750, lon: -74.0540}
+    - {name: "Usaquén", lat: 4.6948, lon: -74.0299}
+    - {name: "Suba", lat: 4.7415, lon: -74.0807}
+    - {name: "Monserrate", lat: 4.6058, lon: -74.0561}
+
+# -------- Catálogo de lugares (espacial) --------
+# Mostramos una muestra. El catálogo completo de Sin remedio tiene 71 entradas.
+# Para usar en producción, copiar el catalogo_referencias.py original al YAML
+# o cargarlo desde un JSON separado (configurable abajo).
+lugares_catalogo_path: "configs/lugares_sin_remedio.json"
+
+# -------- Personajes --------
+personajes_catalogo_path: "configs/personajes_sin_remedio.json"
