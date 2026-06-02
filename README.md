@@ -5,8 +5,19 @@ con visualizaciones interactivas y reportes en Excel y mapas.
 
 Diseñado originalmente para *Sin remedio* de Antonio Caballero (Bogotá, 1972), pero
 configurable para cualquier corpus narrativo con marcas de párrafo o capítulo.
-
+[English version below]
 ---
+## Transparencia Metodológica e Integración de IA
+Este proyecto se desarrolló mediante un flujo de trabajo *human-in-the-loop*, utilizando a Claude como colaborador asistido por IA.
+- **Rol de la IA**: Generación de código, extracción de patrones y análisis estadístico.
+- **Rol de la investigadora**: Preparación del corpus, ingeniería de prompts, validación crítica y análisis interpretativo.
+- **Compromiso**: Priorizamos la transparencia para garantizar la replicabilidad y auditoría científica.
+
+## Uso
+La estructura es modular y permite correr los análisis en Google Colab:
+- `/src`: Módulos de código (corpus, extracción, análisis, visualización).
+- `/notebooks`: Cuadernos de Jupyter autocontenidos.
+- `/configs`: Archivos YAML para adaptar el toolkit a otros corpus.
 
 ## Estructura
 
