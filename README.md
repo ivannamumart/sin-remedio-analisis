@@ -5,6 +5,7 @@ con visualizaciones interactivas y reportes en Excel y mapas.
 
 Diseñado originalmente para *Sin remedio* de Antonio Caballero (Bogotá, 1972), pero
 configurable para cualquier corpus narrativo con marcas de párrafo o capítulo.
+
 [English version below]
 ---
 ## Transparencia Metodológica e Integración de IA
