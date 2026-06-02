@@ -158,3 +158,20 @@ trabajo original sobre el que se desarrolló:
 > oráculo espacial de la narrativa de Antonio Caballero asistido por
 > inteligencia artificial.* Maestría en Humanidades Digitales, Universidad de
 > los Andes.
+
+
+# Geoaffect Toolkit · Assisted Geocritical Mapping
+
+This repository contains reproducible tools for the spatial and affective analysis of literary corpora. Originally designed for *Sin remedio* by Antonio Caballero, it is fully configurable for any narrative text.
+
+## Methodological Transparency & AI Integration
+This project was developed through a *human-in-the-loop* workflow using Claude as an AI-assisted research collaborator.
+- **AI Role**: Code generation, pattern extraction, and statistical analysis.
+- **Human Role**: Corpus preparation, prompt engineering, validation of all algorithmic decisions, and interpretative analysis.
+- **Commitment**: The methodology prioritizes transparency, documenting all AI-assisted steps to ensure replicability and auditability.
+
+## Installation & Quick Start
+```bash
+git clone <repo-url> geoaffect-toolkit
+cd geoaffect-toolkit
+pip install -r requirements.txt
