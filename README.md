@@ -1,5 +1,44 @@
 # Geoaffect Toolkit · Cartografía geocrítica asistida
 
+[English version below]
+
+Herramientas reproducibles para el análisis espacial y afectivo de corpus literarios. Diseñado originalmente para *Sin remedio* de Antonio Caballero (Bogotá, 1972), pero configurable para cualquier obra.
+
+## Transparencia Metodológica e Integración de IA
+Este proyecto se desarrolló mediante un flujo de trabajo *human-in-the-loop*, utilizando a Claude como colaborador asistido por IA.
+- **Rol de la IA**: Generación de código, extracción de patrones y análisis estadístico.
+- **Rol de la investigadora**: Preparación del corpus, ingeniería de prompts, validación crítica y análisis interpretativo.
+- **Compromiso**: Priorizamos la transparencia para garantizar la replicabilidad y auditoría científica.
+
+## Estructura y Uso
+La estructura es modular y permite correr los análisis en Google Colab:
+- `/src`: Módulos de código (corpus, extracción, análisis, visualización).
+- `/notebooks`: Cuadernos de Jupyter autocontenidos.
+- `/configs`: Archivos YAML para adaptar el toolkit a otros corpus.
+
+*(Para ver la documentación técnica completa, instrucciones de instalación y uso, consulta la sección inferior).*
+
+---
+
+# Geoaffect Toolkit · Assisted Geocritical Mapping
+
+This repository contains reproducible tools for the spatial and affective analysis of literary corpora. Originally designed for *Sin remedio* by Antonio Caballero, it is fully configurable for any narrative text.
+
+## Methodological Transparency & AI Integration
+This project was developed through a *human-in-the-loop* workflow using Claude as an AI-assisted research collaborator.
+- **AI Role**: Code generation, pattern extraction, and statistical analysis.
+- **Human Role**: Corpus preparation, prompt engineering, validation of all algorithmic decisions, and interpretative analysis.
+- **Commitment**: The methodology prioritizes transparency, documenting all AI-assisted steps to ensure replicability and auditability.
+
+## Installation & Quick Start
+```bash
+git clone <repo-url> geoaffect-toolkit
+cd geoaffect-toolkit
+pip install -r requirements.txt
+
+
+# Geoaffect Toolkit · Cartografía geocrítica asistida
+
 Herramientas reproducibles para el análisis espacial y afectivo de corpus literarios,
 con visualizaciones interactivas y reportes en Excel y mapas.
 
